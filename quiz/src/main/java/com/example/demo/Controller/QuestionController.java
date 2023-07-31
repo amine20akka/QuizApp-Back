@@ -53,7 +53,7 @@ public class QuestionController {
         try {
             return new ResponseEntity<>(questionService.getQuestionsByCategory(category), HttpStatus.OK);   
         } catch (Exception e) {
-            logger.error("An error occurred", e);
+            logger.error("An error occurred : ", e);
         }
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
@@ -63,13 +63,13 @@ public class QuestionController {
      */
     @PostMapping("/add")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public ResponseEntity<String> addQuestion(@RequestBody QuestionDTO question) {
+    public ResponseEntity<String> addQuestion(@RequestBody QuestionDTO questionAdded) {
         try {
-            return new ResponseEntity<>(questionService.addQuestion(question), HttpStatus.OK);   
+            return new ResponseEntity<>(questionService.addQuestion(questionAdded), HttpStatus.OK);   
         } catch (Exception e) {
-            logger.error("An error occurred", e);
+            logger.error("An error occurred : ", e);
         }
-        return new ResponseEntity<>("FAILURE", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Question NOT added !", HttpStatus.BAD_REQUEST);
     }
         
     /**
@@ -82,9 +82,9 @@ public class QuestionController {
         try {
             return new ResponseEntity<>(questionService.updateQuestion(id,updatedQuestionDTO), HttpStatus.OK);   
         } catch (Exception e) {
-            logger.error("An error occurred", e);
+            logger.error("An error occurred : ", e);
         }
-        return new ResponseEntity<>("FAILURE", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Question NOT updated", HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -96,9 +96,9 @@ public class QuestionController {
         try {
             return new ResponseEntity<>(questionService.deleteQuestion(id), HttpStatus.OK);
         } catch (Exception e) {
-            logger.error("An error occurred", e);
+            logger.error("An error occurred : ", e);
         }
-        return new ResponseEntity<>("FAILURE", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Question NOT deleted", HttpStatus.BAD_REQUEST);
     }
     
 
@@ -111,9 +111,9 @@ public class QuestionController {
         try {
             return new ResponseEntity<>(questionService.getQuestionsByOption2(option2), HttpStatus.OK);
         } catch (Exception e) {
-            logger.error("An error occurred", e);
+            logger.error("An error occurred : ", e);
         }
-        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
     
     /**
@@ -125,9 +125,9 @@ public class QuestionController {
         try {
             return new ResponseEntity<>(questionService.getQuestionsByIdGreaterThan(n), HttpStatus.OK);
         } catch (Exception e) {
-            logger.error("An error occurred", e);
+            logger.error("An error occurred : ", e);
         }
-        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
     
     @GetMapping("/difficultyLevel/{diff}")
@@ -136,8 +136,8 @@ public class QuestionController {
         try {
             return new ResponseEntity<>(questionService.getQuestionsByDifficultyLevel(difficultyLevel), HttpStatus.OK);
         } catch (Exception e) {
-            logger.error("An error occurred", e);
+            logger.error("An error occurred : ", e);
         }
-        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 }

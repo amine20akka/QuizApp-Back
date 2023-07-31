@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.DTO.UserDTO;
-import com.example.demo.Entity.User;
 import com.example.demo.Service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -34,31 +33,31 @@ public class UserController {
         try {
             return new ResponseEntity<>(userService.getUser(username, password), HttpStatus.OK);
         } catch (Exception e) {
-            logger.error("An error occurred", e);
+            logger.error("An error occurred : ", e);
         }
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/add")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public ResponseEntity<String> addUser(@RequestBody User user) {
+    public ResponseEntity<UserDTO> addUser(@RequestBody UserDTO userDTO) {
         try {
-            return ResponseEntity.ok(userService.addUser(user));
+            return ResponseEntity.ok(userService.addUser(userDTO));
         } catch (Exception e) {
-            logger.error("An error occurred", e);
+            logger.error("An error occurred : ", e);
         }
-        return new ResponseEntity<>("FAILURE", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
     
     @PostMapping("/authenticate")
-    public ResponseEntity<String> authenticateUser(@RequestBody User user) {
+    public ResponseEntity<UserDTO> authenticateUser(@RequestBody UserDTO userDTO) {
         try {
-            return ResponseEntity.ok(userService.authenticateUser(user));
+            return ResponseEntity.ok(userService.authenticateUser(userDTO));
         } catch (Exception e) {
-            logger.error("An error occurred", e);
+            logger.error("An error occurred : ", e);
         }
-        return new ResponseEntity<>("FAILURE", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
 }

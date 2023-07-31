@@ -38,7 +38,7 @@ public class QuizService {
 
             return "SUCCESS";   
         } catch (Exception e) {
-            logger.error("An error occurred", e);
+            logger.error("An error occurred : ", e);
         }
         return "FAILURE";
     }
@@ -47,7 +47,7 @@ public class QuizService {
         try {
             return QuizDTO.toDTO(quizDAO.findById(id));   
         } catch (Exception e) {
-            logger.error("An error occurred", e);
+            logger.error("An error occurred : ", e);
         }
         return null;
     }

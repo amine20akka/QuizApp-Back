@@ -34,7 +34,7 @@ public class QuizController {
         try {
             return new ResponseEntity<>(quizService.createQuiz(category, nbQuestions, title),HttpStatus.CREATED);   
         } catch (Exception e) {
-            logger.error("An error occurred", e);
+            logger.error("An error occurred : ", e);
         }
         return new ResponseEntity<String>("FAILURE", HttpStatus.BAD_REQUEST);
     }
@@ -45,7 +45,7 @@ public class QuizController {
         try {
             return new ResponseEntity<>(quizService.getQuiz(id), HttpStatus.OK);   
         } catch (Exception e) {
-            logger.error("An error occurred", e);
+            logger.error("An error occurred : ", e);
         }
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }

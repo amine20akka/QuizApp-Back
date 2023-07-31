@@ -11,6 +11,7 @@ public class UserDTO {
     private String username;
     private String password;
     private Role roles;
+    private String token;
 
     public static UserDTO toDTO(User user) {
         UserDTO userDTO = new UserDTO();

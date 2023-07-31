@@ -36,7 +36,7 @@ public class QuestionService {
         }        
         catch(Exception e)
         {
-            logger.error("An error occurred", e);
+            logger.error("An error occurred : ", e);
         }
         return null;
     }
@@ -44,13 +44,13 @@ public class QuestionService {
     public String addQuestion(QuestionDTO questionDTO) {
         try {
             questionDAO.save(QuestionDTO.toEntity(questionDTO));
-            return "QUESTION ADDED";
+            return "Question ADDED Successfully";
         }        
         catch(Exception e)
         {
-            logger.error("An error occurred", e);
+            logger.error("An error occurred : ", e);
         }
-        return null;
+        return "Error: Unable to add the question";
     }
 
     public String updateQuestion(Integer id, QuestionDTO updatedQuestionDTO) {
@@ -77,7 +77,7 @@ public class QuestionService {
                 return "QUESTION NOT FOUND";
             }
         } catch (Exception e) {
-            logger.error("An error occurred", e);
+            logger.error("An error occurred : ", e);
         }
         return "QUESTION NOT UPDATED";
     }
@@ -92,16 +92,16 @@ public class QuestionService {
                 return "QUESTION NOT FOUND";
             }
         } catch (Exception e) {
-            logger.error("An error occured", e);
+            logger.error("An error occured : ", e);
         }
-        return null;
+        return "QUESTION NOT DELETED";
     }
     
     public List<QuestionDTO> getQuestionsByOption2(String option2) {
         try {
             return QuestionDTO.ToDTO(questionDAO.searchQuestionsByOption2(option2));
         } catch (Exception e) {
-            logger.error("An error occured", e);
+            logger.error("An error occured : ", e);
         }
         return null;
     }
@@ -110,7 +110,7 @@ public class QuestionService {
         try {
             return QuestionDTO.ToDTO(questionDAO.findByIdGreaterThan(n));
         } catch (Exception e) {
-            logger.error("An error occured", e);
+            logger.error("An error occured : ", e);
         }
         return null;
     }
@@ -119,7 +119,7 @@ public class QuestionService {
         try {
             return questionDAO.findQuestionsByDifficultyLevel(difficultyLevel);
         } catch (Exception e) {
-            logger.error("An error occured", e);
+            logger.error("An error occured : ", e);
         }
         return null;
     }
