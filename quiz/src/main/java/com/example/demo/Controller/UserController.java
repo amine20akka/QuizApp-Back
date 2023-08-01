@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.DTO.UserDTO;
+import com.example.demo.Entity.AuthenticationRequestDTO;
 import com.example.demo.Service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -51,9 +52,11 @@ public class UserController {
 
     
     @PostMapping("/authenticate")
-    public ResponseEntity<UserDTO> authenticateUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> authenticateUser(@RequestBody AuthenticationRequestDTO authenticationRequestDTO) {
         try {
-            return ResponseEntity.ok(userService.authenticateUser(userDTO));
+            String username = authenticationRequestDTO.getUsername();
+            String password = authenticationRequestDTO.getPassword();
+            return ResponseEntity.ok(userService.authenticateUser(username,password));
         } catch (Exception e) {
             logger.error("An error occurred : ", e);
         }

@@ -48,15 +48,15 @@ public class UserService {
         return null;
     }
 
-    public UserDTO authenticateUser(UserDTO userAuth) {
+    public UserDTO authenticateUser (String username, String password) {
         try {
             authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(userAuth.getUsername(), userAuth.getPassword())
+                new UsernamePasswordAuthenticationToken(username, password)
             );
-            UserDTO userDTO = UserDTO.toDTO(userDAO.findByUsername(userAuth.getUsername()));
+            UserDTO userDTO = UserDTO.toDTO(userDAO.findByUsername(username));
             userDTO.setToken(jwtService.generateToken(UserDTO.toEntity(userDTO))); 
             return userDTO;
-        }        
+        }
         catch(Exception e)
         {
             logger.error("An error occurred : ", e);
