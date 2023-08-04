@@ -39,7 +39,7 @@ public class QuestionController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(questionService.getAllQuestions());   
         } catch (Exception e) {
-            logger.error("An error occurred", e);
+            logger.error("An error occurred : ", e);
         }
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
