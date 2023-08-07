@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.DTO.AuthenticationRequestDTO;
 import com.example.demo.DTO.UserDTO;
-import com.example.demo.Entity.AuthenticationRequestDTO;
 import com.example.demo.Service.UserService;
 
 import lombok.RequiredArgsConstructor;
